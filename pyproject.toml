@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "blog"
+version = "0.1.0"
+description = "The backend aspects of my blog project."
+authors = ["JohannSuarez <johann.suarez92@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+mysql = "^0.0.3"
+mysql-connector-python = "^8.0.27"
+mysqlclient = "^2.1.0"
+python-dotenv = "^0.19.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[tool.poetry.scripts]
+drive = "blog.main:drive"
+tests = "scripts.project_helper:run_tests"
+stubs = "scripts.project_helper:stub_gen"
+analyze = "scripts.project_helper:run_analyzer"
+db = "blog.main:connect"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
