@@ -20,6 +20,7 @@ tests = "scripts.project_helper:run_tests"
 stubs = "scripts.project_helper:stub_gen"
 analyze = "scripts.project_helper:run_analyzer"
 db = "blog.main:connect"
+db2 = "blog.main:sql_alch"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
