@@ -12,8 +12,3 @@ def sql_alch_test():
     with engine.connect() as conn:
         result = conn.execute(text("select 'hello world'"))
         print(result.all())
-
-
-
-#def sql_alch_test():
-#    print("FCCK")

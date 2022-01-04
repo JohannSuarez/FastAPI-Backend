@@ -13,6 +13,9 @@ python-dotenv = "^0.19.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+flake8 = "^4.0.1"
+black = "^21.12b0"
+autopep8 = "^1.6.0"
 
 [tool.poetry.scripts]
 drive = "blog.main:drive"
@@ -21,6 +24,8 @@ stubs = "scripts.project_helper:stub_gen"
 analyze = "scripts.project_helper:run_analyzer"
 db = "blog.main:connect"
 db2 = "blog.main:sql_alch"
+alch_create = "alch_practice.table_operations:create_table"
+alch_read = "alch_practice.table_operations:read_column_names"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -17,7 +17,7 @@ def connect() -> Union[None, list]:
                         Config.sql_table())
 
 
-    #res = dn.fetch_tables()
+    # res = dn.fetch_tables()
     res = dn.list_table_data() or "No results"
 
     print(res)
