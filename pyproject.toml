@@ -26,6 +26,11 @@ db = "blog.main:connect"
 db2 = "blog.main:sql_alch"
 alch_create = "alch_practice.table_operations:create_table"
 alch_read = "alch_practice.table_operations:read_column_names"
+schema_tables = "alch_practice.schema:table_represent"
+schema_reflect = "alch_practice.schema:schema_reflect"
+schema_inspect = "alch_practice.schema:schema_inspector"
+expr_language = "alch_practice.expression_language:select_all"
+select_limited = "alch_practice.expression_language:select_limited"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

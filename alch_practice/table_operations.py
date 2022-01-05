@@ -43,7 +43,6 @@ def create_table():
 # Originally raw_column_names.py
 def read_column_names():
 
-
     sqldb_name: str = Config.sql_name()
     sqldb_addr: str = Config.sql_address()
     sqldb_pass: str = Config.sql_pass()
