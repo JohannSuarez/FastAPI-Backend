@@ -31,6 +31,12 @@ schema_reflect = "alch_practice.schema:schema_reflect"
 schema_inspect = "alch_practice.schema:schema_inspector"
 expr_language = "alch_practice.expression_language:select_all"
 select_limited = "alch_practice.expression_language:select_limited"
+where = "alch_practice.expression_language:where_method"
+like = "alch_practice.expression_language:like_method"
+select_order = "alch_practice.expression_language:select_order"
+select_in = "alch_practice.expression_language:select_in"
+create_table = "alch_practice.expression_language:create_table"
+join_tables = "alch_practice.expression_language:join_tables"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
