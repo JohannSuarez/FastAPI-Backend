@@ -10,7 +10,7 @@ mysql = "^0.0.3"
 mysql-connector-python = "^8.0.27"
 mysqlclient = "^2.1.0"
 python-dotenv = "^0.19.2"
-fastapi = {extras = ["all"], version = "^0.71.0"}
+fastapi = { extras = ["all"], version = "^0.71.0" }
 SQLAlchemy = "^1.4.29"
 PyMySQL = "^1.0.2"
 
@@ -38,8 +38,9 @@ where = "alch_practice.expression_language:where_method"
 like = "alch_practice.expression_language:like_method"
 select_order = "alch_practice.expression_language:select_order"
 select_in = "alch_practice.expression_language:select_in"
-create_table = "alch_practice.expression_language:create_table"
-join_tables = "alch_practice.expression_language:join_tables"
+orm = "alch_practice.orm:orm_operations"
+orm_foreign_key = "alch_practice.orm:orm_foreign_key"
+raw_orm = "alch_practice.raw_orm:raw_orm"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
