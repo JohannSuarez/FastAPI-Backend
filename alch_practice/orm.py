@@ -5,7 +5,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker, relationship # What is sessionmaker?
 
+
 '''
+Documentation for Sessionmaker:
+https://docs.sqlalchemy.org/en/13/orm/session_basics.html
+
 In the most general sense, the Session establishes all conversations with the database
 and represents a "holding zone" for all the objects which you've loaded or
 associated with it during its lifespan. It provides the entrypoint to acquire a Query
@@ -38,11 +42,6 @@ def orm_operations():
     ses = Session()
 
     '''
-    When do I make a sessionmaker?
-    '''
-
-
-    '''
     The Session beings in an essentially stateless form.
     Once queries are issues or other objects are persisted with it
     it requests a connection resource from an Engine that is associated
@@ -52,6 +51,42 @@ def orm_operations():
     pending state.
     '''
 
+    '''
+    When do I make a sessionmaker?
+
+    Just one time, somewhere in your application's global scope.
+    It should be looked upon as part of your application's configuration.
+
+    If your application has three .py files in a package, you could,
+    for example, place the sessionmaker line in your __init__.py file;
+
+    from that point on your other modules say "from mypackage import Session".
+    That way, everyone else just uses Session( ), and the configuration
+    of that session is controlled by that central point.
+
+    If your application starts up, does imports, but does not know what
+    database it's going to be connection to, you can bind the 
+    Session at the "class" level to the engine later on, 
+    using sessionmaker.configure()
+
+    In the examples shown, we will frequently show the sessionmaker
+    being created right above the line where we invoke Session.
+    In reality, the sessionmaker would be somewhere at the module
+    level. The calls to instantiate Session would then be placed at the
+    point in the application where database conversations begin.
+
+    TDLR:
+    As a general rule, keep the lifecycle of the session separate and external
+    from functions and objects that access and/or manipulate database data.
+    This will greatly help with achieving a predictable and consistent
+    transactional scope.
+    
+    Make sure you have a clear notion of where transactons begin and
+    end, and keep transactions short, meaning, they end
+    at the series of a sequence of operations, instead of 
+    being held open indefinitely.
+
+    '''
 
     ses.add_all(
             [Car(Id=1, Name='Audi', Price=52642),
