@@ -1,0 +1,23 @@
+Source:
+https://camillovisini.com/article/abstracting-fastapi-services/#fastapi--building-high-performing-python-apis
+
+config - Database Session
+models - SQLAlchemy models
+routers - API Routes
+schemas - Pydantic Models
+services - Business Logic
+utils - Service result
+
+The granular nature of namespacing allow to distinguish parts of the application, e.g. routes versus
+business logic belonging to a particular service - grouping similar tasks together, while keeping
+distinct parts separated. Four principal packages are needed. For each service, one module is 
+added to these four packages. For instance, a service called "Foo" requires the following modules
+(discussed in detail below):
+
+./routers/ foo.py # Router instance and routes
+./services/ foo.py # Business logic (including CRUD helpers)
+./schemas/ foo.py # Data "schemas" (e.g. Pydantic models)
+./models/ foo.py # Database models (e.g., SQLAlchemy)
+
+The four principal packages are complemented by generic packages which contain application-specific
+(and not service-specific) functionality, such as configuration or utility functions.

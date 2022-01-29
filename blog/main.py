@@ -1,34 +1,22 @@
-from blog import Config
-from blog import db
-from blog import sqlalchem
-from typing import Union
+from fastapi import FastAPI
+from routers import foo
+from utils.app_exceptions import AppExceptionCase, app_exception_handler
 
+app = FastAPI()
 
-def connect() -> Union[None, list]:
-    """
-    Interact with Database wrapper,
-        attempt to connect to database.
-    """
+@app.exception_handler(AppExceptionCase) # This decorator is from FastAPI
+async def custom_app_exception_handler(request, e):
+    return await app_exception_handler(request, e)
 
-    dn = db.DBInterface(Config.sql_address(),
-                        Config.sql_name(),
-                        Config.sql_pass(),
-                        Config.sql_db(),
-                        Config.sql_table())
+'''
+Routers and their routes are
+defined in modules within the routers package. Each
+route instantiates the respective service and passes on the database
+session from the request dependency. Handled by handle_result(), the
+service result (either the requested data as the result of a successful
+operation or an exception) is returned. In case of an exception, instead of
+(and before) returning any response, the app exception handler in main picks
+up handling the exception and returns a response.
+'''
 
-
-    # res = dn.fetch_tables()
-    res = dn.list_table_data() or "No results"
-
-    print(res)
-    return(res)
-
-def sql_alch() -> None:
-    sqlalchem.sql_alch_test()
-
-def drive() -> None:
-    print("Test function.")
-
-
-if __name__ == "__main__":
-    drive()
+app.include_router(foo.router)
