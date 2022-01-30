@@ -5,7 +5,7 @@ to differentiate between FooItem models (SQLAlchemy) and FooItem schemas (Pydant
 appropriate import namespacing
 '''
 from sqlalchemy import Integer, String, Boolean, Column
-from config.database import Base
+from ..config.database import Base
 
 class FooItem(Base):
     __tablename__ = "foo_items"

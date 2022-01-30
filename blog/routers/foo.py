@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends
+from ..services.foo import FooService
+from ..schemas.foo import FooItem, FooItemCreate
 
-from services.foo import FooService
-from schemas.foo import FooItem, FooItemCreate
-
-from utils.service_result import handle_result
-from config.database import get_db
+from ..utils.service_result import handle_result
+from ..config.database import get_db
 
 '''
 Routers and their routes are
@@ -23,8 +22,20 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+'''
+FastAPI has a very powerful but intuitive Dependency Injection system.
+It is designed to be very simple to use, and to make it very easy for any developer to
+integrate other components with FastAPI.
+
+Dependency Injection means, in programming, that there is a way for your code (in this case, your
+path operation functions) to declare things that it requires to work and use: "dependencies"
+
+And then, that system (in this case FastAPI) will take care of doing whatever is needed to provide
+your code with those needed dependencies.
+'''
+
 @router.post("/item/", response_model=FooItem)
-async def create_item(item: FooItemCreate, db: get_db = Depends())
+async def create_item(item: FooItemCreate, db: get_db = Depends()):
     result = FooService(db).create_item(item)
     return handle_result(result)
 

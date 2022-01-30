@@ -8,7 +8,8 @@ exception (e.g. which status code should be returned to the client).
 '''
 import inspect
 
-from utils.app_exceptions import AppExceptionCase
+from ..utils.app_exceptions import AppExceptionCase
+from loguru import logger
 
 class ServiceResult:
     def __init__(self, arg):
@@ -32,14 +33,11 @@ class ServiceResult:
             return "<ServiceResult Success>"
         return f"<ServiceResult AppException> {self.exception_case}"
 
-
-    '''
     def __enter__(self):
         return self.value
 
-    def __exit__(self):
+    def __exit__(self, *kwargs):
         pass
-    '''
 
 def caller_info() -> str:
     info = inspect.getframeinfo(inspect.stack()[2][0])
@@ -48,9 +46,8 @@ def caller_info() -> str:
 def handle_result(result: ServiceResult):
     if not result.success:
         with result as exception:
+            logger.error(f"{exception} | caller={caller_info()}")
             raise exception
 
     with result as result:
         return result
-
-

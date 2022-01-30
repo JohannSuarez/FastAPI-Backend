@@ -20,7 +20,6 @@ object, where "unique" means "only one object with a particulata primary key".
 '''
 
 
-
 def orm_operations():
 
     eng = create_engine('sqlite:///:memory:')
@@ -65,8 +64,8 @@ def orm_operations():
     of that session is controlled by that central point.
 
     If your application starts up, does imports, but does not know what
-    database it's going to be connection to, you can bind the 
-    Session at the "class" level to the engine later on, 
+    database it's going to be connection to, you can bind the
+    Session at the "class" level to the engine later on,
     using sessionmaker.configure()
 
     In the examples shown, we will frequently show the sessionmaker
@@ -80,10 +79,10 @@ def orm_operations():
     from functions and objects that access and/or manipulate database data.
     This will greatly help with achieving a predictable and consistent
     transactional scope.
-    
+
     Make sure you have a clear notion of where transactons begin and
     end, and keep transactions short, meaning, they end
-    at the series of a sequence of operations, instead of 
+    at the series of a sequence of operations, instead of
     being held open indefinitely.
 
     '''

@@ -65,3 +65,26 @@ class AppException:
             status_code = 401
             AppExceptionCase.__init__(self, status_code, context)
 
+    class BlogCreateItem(AppExceptionCase):
+        def __init__(self, context: dict = None):
+            """
+            Item creation failed
+            """
+            status_code = 500
+            AppExceptionCase.__init__(self, status_code, context)
+
+    class BlogGetPost(AppExceptionCase):
+        def __init__(self, context: dict=None):
+            """
+            Item not found
+            """
+            status_code = 404
+            AppExceptionCase.__init__(self, status_code, context)
+
+    class BlogItemRequiresAuth(AppExceptionCase):
+        def __init__(self, context: dict=None):
+            '''
+            Item is not public and requires auth
+            '''
+            status_code = 401
+            AppExceptionCase.__init__(self, status_code, context)

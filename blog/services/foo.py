@@ -6,12 +6,12 @@ with returnable data or, in case of an exception, an AppException.
 
 In both cases, the respective result is returned back "upwards" to the controller layer.
 '''
-from schemas.foo import FooItemCreate
-from utils.app_exceptions import AppException
+from ..schemas.foo import FooItemCreate
+from ..utils.app_exceptions import AppException
 
-from services.main import AppService, AppCRUD
-from models.foo import FooItem
-from utils.service_result import ServiceResult
+from ..services.main import AppService, AppCRUD
+from ..models.foo import FooItem
+from ..utils.service_result import ServiceResult
 from typing import Union
 
 class FooService(AppService):

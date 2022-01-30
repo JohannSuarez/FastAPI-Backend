@@ -1,12 +1,34 @@
+from .utils.app_exceptions import AppExceptionCase, app_exception_handler
+from .routers import foo
+from .routers import blog
+from .config.database import create_tables
 from fastapi import FastAPI
-from routers import foo
-from utils.app_exceptions import AppExceptionCase, app_exception_handler
+
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
+
+from .utils.request_exceptions import (
+    http_exception_handler,
+    request_validation_exception_handler
+)
+
+create_tables()
 
 app = FastAPI()
+
+@app.exception_handler(StarletteHTTPException)
+async def custom_http_exception_handler(request, e):
+    return await http_exception_handler(request, e)
+
+@app.exception_handler(RequestValidationError)
+async def custom_validation_exception_handler(request, e):
+    return await request_validation_exception_handler(request, e)
 
 @app.exception_handler(AppExceptionCase) # This decorator is from FastAPI
 async def custom_app_exception_handler(request, e):
     return await app_exception_handler(request, e)
+
 
 '''
 Routers and their routes are
@@ -20,3 +42,8 @@ up handling the exception and returns a response.
 '''
 
 app.include_router(foo.router)
+app.include_router(blog.router)
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
