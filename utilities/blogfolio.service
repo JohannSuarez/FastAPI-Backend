@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicorn uvicorn service for blogfolio API
+After=syslog.target
+
+[Service]
+ExecStart=/root/.virtualenvs/blog_api/bin/gunicorn -b 127.0.0.1:8000 -w 4 -k uvicorn.workers.UvicornWorker blog.main:app --name blogfolio_api --chdir /root/Documents/blogfolio/ --access-logfile /root/.config/blogfolio/logs/access.log --error-logfile /root/.config/blogfolio/logs/error.log --user root
+# Requires systemd version 211 or newer
+RuntimeDirectory=/root/Documents/blogfolio
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
+#
