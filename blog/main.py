@@ -1,6 +1,7 @@
 from .utils.app_exceptions import AppExceptionCase, app_exception_handler
 from .routers import foo
 from .routers import blog
+from .routers import eyevy
 from .config.database import create_tables
 from fastapi import FastAPI
 
@@ -43,6 +44,7 @@ up handling the exception and returns a response.
 
 app.include_router(foo.router)
 app.include_router(blog.router)
+app.include_router(eyevy.router)
 
 @app.get("/")
 async def root():
