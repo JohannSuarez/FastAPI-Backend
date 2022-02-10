@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, APIRouter
-from ..services.blog import eyevy
+from ..services.eyevy import EyevyService
 from ..utils.service_result import handle_result
 from pathlib import Path
 
@@ -11,9 +11,9 @@ router = APIRouter(
     responses = {404: {"description": "Not Found"}},
 )
 
+
 @router.post('/eyevy/')
-async def receive_image(image: UploadFile):
-#async def receive_image(image: UploadFile = File(...)):
+async def receive_image(image: UploadFile = File(...)):
 
     filename: Path = Path(image.filename)
     directory: str = "received"

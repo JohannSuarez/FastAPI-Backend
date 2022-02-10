@@ -130,3 +130,10 @@ dmypy.json
 
 # SQLite DB
 *db
+
+# Images
+*png
+*jpg
+*jpeg
+*webm
+*tiff

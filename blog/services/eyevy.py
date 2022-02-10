@@ -1,3 +1,7 @@
+from fastapi import FastAPI, UploadFile, APIRouter
+from pathlib import Path
+
+
 """
 What should we put into this class?
 What should we receive from this class?
@@ -21,7 +25,7 @@ with the with statement.
 from ..utils.app_exceptions import AppException
 from ..utils.service_result import ServiceResult
 
-class ReceiveImage():
+class EyevyService():
     """
     What is the service?
     We either return a ServiceResult fed with valid return data,
@@ -29,8 +33,11 @@ class ReceiveImage():
     """
 
     @staticmethod
-    def verfication():
+    def receive_image(image):
+        pass
 
+    @staticmethod
+    def verfication():
         pass
 
 
