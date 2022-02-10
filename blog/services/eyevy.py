@@ -18,7 +18,10 @@ with the with statement.
 
 """
 
-class EyevyService():
+from ..utils.app_exceptions import AppException
+from ..utils.service_result import ServiceResult
+
+class ReceiveImage():
     """
     What is the service?
     We either return a ServiceResult fed with valid return data,
