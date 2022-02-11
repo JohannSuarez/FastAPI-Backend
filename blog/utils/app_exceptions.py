@@ -88,3 +88,19 @@ class AppException:
             '''
             status_code = 401
             AppExceptionCase.__init__(self, status_code, context)
+
+    class ImageVerification(AppExceptionCase):
+        def __init__(self, context: dict = None):
+            '''
+            File isn't a proper image format.
+            '''
+            status_code = 406
+            AppExceptionCase.__init__(self, status_code, context)
+
+    class ImageSaving(AppExceptionCase):
+        def __init__(self, context: dict = None):
+            '''
+            Something went wrong during image saving.
+            '''
+            status_code = 418
+            AppExceptionCase.__init__(self, status_code, context)

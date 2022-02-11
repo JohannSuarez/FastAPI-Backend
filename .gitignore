@@ -132,8 +132,9 @@ dmypy.json
 *db
 
 # Images
-*png
+*png*
 *jpg
 *jpeg
 *webm
 *tiff
+

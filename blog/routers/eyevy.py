@@ -14,16 +14,5 @@ router = APIRouter(
 
 @router.post('/eyevy/')
 async def receive_image(image: UploadFile = File(...)):
-
-    filename: Path = Path(image.filename)
-    directory: str = "received"
-
-    absolute_dir: Path = Path(__file__).parent.resolve()
-
-    with open(f"{str(absolute_dir)}/{directory}/{filename.with_suffix('.png')}", "wb") as buffer:
-        shutil.copyfileobj(image.file, buffer)
-
-    print("RECEIVED IMAGE")
-    print(f"Saving to: {directory}/{filename.with_suffix('.png')} ")
-
-    return {"filename": image.filename }
+    result = EyevyService().image_handler(image)
+    return handle_result(result)
