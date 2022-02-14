@@ -13,6 +13,6 @@ router = APIRouter(
 
 
 @router.post('/eyevy/')
-async def receive_image(image: UploadFile = File(...)):
+def receive_image(image: UploadFile = File(...)):
     result = EyevyService().image_handler(image)
     return handle_result(result)

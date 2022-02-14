@@ -47,14 +47,20 @@ class EyevyService():
         Save the image into the server, unless
         an error is raised along the way.
         """
-
         filename: Path = Path(image.filename)
         directory: str = "received"
         absolute_dir: Path = Path(__file__).parent.resolve()
 
+        '''
         try:
             with open(f"{str(absolute_dir)}/{directory}/{filename.with_suffix('.png')}", "wb") as buffer:
-                shutil.copyfileobj(image.file, buffer)
+                buffer.write(image.file.read()) 
+                print(type(image.file))
+                #shutil.copyfileobj(image.file, buffer)
+        '''
+        try:
+            im = Image.open(image.file)
+            im.save(f"{str(absolute_dir)}/{directory}/{filename.with_suffix('.png')}")
         except Exception:
             context: dict = {"Write Error": "Something went wrong during image save step."}
             return ServiceResult(AppException.ImageSaving(context))
