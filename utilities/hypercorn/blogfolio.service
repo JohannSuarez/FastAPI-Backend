@@ -3,13 +3,13 @@ Description=Hypercorn service for blogfolio API
 After=syslog.target
 
 [Service]
+Type=simple
 ExecStart=/root/.virtualenvs/blog_api/bin/hypercorn blog.main:app --bind 127.0.0.1:8000 --log-level INFO --access-logfile /root/.config/blogfolio/logs/access.log --error-logfile /root/.config/blogfolio/logs/error.log
 WorkingDirectory=/root/Documents/blogfolio/
 RuntimeDirectory=/root/Documents/blogfolio/
 
-#Restart=no
+Restart=yes
 KillSignal=SIGQUIT
-Type=notify
 StandardError=syslog
 NotifyAccess=all
 
