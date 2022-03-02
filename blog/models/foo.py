@@ -11,5 +11,5 @@ class FooItem(Base):
     __tablename__ = "foo_items"
 
     id = Column(Integer, primary_key=True, index=True)
-    description = Column(String)
+    description = Column(String(512))
     public = Column(Boolean, default=False)

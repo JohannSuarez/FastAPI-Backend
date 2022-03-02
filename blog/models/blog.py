@@ -5,5 +5,5 @@ class BlogPostItem(Base):
     __tablename__ = "blog"
 
     date_time = Column(DateTime, primary_key=True, index=True)
-    title = Column(String)
-    body = Column(String)
+    title = Column(String(256))
+    body = Column(String(256))
