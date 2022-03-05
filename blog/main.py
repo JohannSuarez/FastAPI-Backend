@@ -23,7 +23,7 @@ app = FastAPI()
 
 '''
 When we create an instance of the OAuth2PasswordBearer class we pass
-in the tokenUrl paramter. The parameter contains the URL that the client
+in the tokenUrl parameter. The parameter contains the URL that the client
 (the frontend running in the user's browser) will use to send the username
 and password in order to to get a token.
 

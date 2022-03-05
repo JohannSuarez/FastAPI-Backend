@@ -104,3 +104,19 @@ class AppException:
             '''
             status_code = 418
             AppExceptionCase.__init__(self, status_code, context)
+
+    class DHTCreateItem(AppExceptionCase):
+        def __init__(self, context: dict = None):
+            """
+            Item creation failed
+            """
+            status_code = 500
+            AppExceptionCase.__init__(self, status_code, context)
+
+    class DHTGetItem(AppExceptionCase):
+        def __init__(self, context: dict=None):
+            """
+            Item not found
+            """
+            status_code = 404
+            AppExceptionCase.__init__(self, status_code, context)
