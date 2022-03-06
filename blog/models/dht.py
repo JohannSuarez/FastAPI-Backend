@@ -4,12 +4,12 @@ stored within the relational database. They are referenced from AppCRUD. If need
 to differentiate between FooItem models (SQLAlchemy) and FooItem schemas (Pydantic) by
 appropriate import namespacing
 '''
-from sqlalchemy import Integer, String, Boolean, Column, DateTime
+from sqlalchemy import Float, Column, DateTime
 from ..config.database import Base
 
 class DHTItem(Base):
-    __tablename__ = "foo_items"
+    __tablename__ = "dht_data"
 
-    id = Column(Integer, primary_key=True, index=True)
-    description = Column(String(512))
-    public = Column(Boolean, default=False)
+    read_time = Column(DateTime, primary_key=True, index=True)
+    humidity = Column(Float(32))
+    public = Column(Float(32))

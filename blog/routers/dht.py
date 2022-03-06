@@ -12,12 +12,20 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+@router.post("/dht/")
+async def create_item(item: DHTItemCreate):
+    print(item)
+    return {"Received": "We got it"}
+
+'''
 @router.post("/dht/", response_model=DHTItem)
 async def create_item(item: DHTItemCreate, db: get_db = Depends()):
+    print(item)
     result = DHTService(db).create_item(item)
     return handle_result(result)
+'''
 
-@router.get("/item/{item_id}", response_model=DHTItem)
+@router.get("/dht/{item_id}", response_model=DHTItem)
 async def get_item(item_id: int, db: get_db = Depends()):
     result = DHTService(db).get_item(item_id)
     return handle_result(result)

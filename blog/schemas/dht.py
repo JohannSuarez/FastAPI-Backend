@@ -7,6 +7,7 @@ class DHTItemBase(BaseModel):
 # This is the schema that the endpoint
 # expects to receive from POST
 class DHTItemCreate(DHTItemBase):
+    read_time: datetime
     humidity: float
     temperature: float
 

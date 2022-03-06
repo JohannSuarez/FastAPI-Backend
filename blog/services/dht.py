@@ -9,24 +9,24 @@ from datetime import datetime
 
 
 class DHTCRUD(AppCRUD):
-    
+
     def create_item(self, item: DHTItemCreate) -> DHTItem:
-        dht_item = DHTItem(humidity=item.humidity, 
+        dht_item = DHTItem(humidity=item.humidity,
                            temperature=item.temperature,
-                           time_log=item.time_log)
+                           read_time=item.time_log)
         self.db.add(dht_item)
         self.db.commit()
         self.db.refresh(dht_item)
         return dht_item
 
     def get_item(self, date) -> Union[DHTItem, None]:
-        dht_item = self.db.query(DHTItem).filter(DHTItem.time_log == date).first()
+        dht_item = self.db.query(DHTItem).filter(DHTItem.read_time == date).first()
 
         if dht_item:
             return dht_item
         return None
 
-        
+
 
 
 class DHTService(AppService):
@@ -40,6 +40,6 @@ class DHTService(AppService):
         dht_item = DHTCRUD(self.db).get_item(date)
 
         if not dht_item:
-            return ServiceResult(AppException.DHTGetItem({"date_time": date_time}))
+            return ServiceResult(AppException.DHTGetItem({"date_time": read_time}))
 
         return ServiceResult(dht_item)
