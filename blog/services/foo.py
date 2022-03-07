@@ -38,7 +38,8 @@ operation on the database. They do not contain any business logic.
 '''
 class FooCRUD(AppCRUD):
     def create_item(self, item: FooItemCreate) -> FooItem:
-        foo_item = FooItem(description=item.description, public=item.public)
+        foo_item = FooItem(description=item.description,
+                           public=item.public)
         self.db.add(foo_item)
         self.db.commit()
         self.db.refresh(foo_item)

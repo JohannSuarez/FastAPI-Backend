@@ -15,32 +15,18 @@ we return a ServiceResult fed with the Exception object.
 Otherwise we return a ServiceResult with the actual item
 we found.
 '''
-class BlogService(AppService):
-    def create_item(self, item: BlogPostCreate) -> ServiceResult:
-        # Insert blog post
-        blogpost_item = BlogCRUD(self.db).create_item(item)
-        # Afterwards try to retreive it.
-        if not blogpost_item:
-            # If it isn't there, return an exception.
-            return ServiceResult(AppException.BlogGetPost())
-        return ServiceResult(blogpost_item)
-
-        # Get post by providing the post's title.
-    def get_item(self, blogpost_title: str):
-        post_item = BlogCRUD(self.db).get_item(blogpost_title)
-        if not post_item:
-            return ServiceResult(AppException.BlogCreateItem({"blogpost_title": post_item}))
-
-        return ServiceResult(post_item)
 
 class BlogCRUD(AppCRUD):
     def create_item(self, item: BlogPostCreate) -> BlogPostItem:
-        post_item = BlogPostItem(date_time=datetime.now(),
+        x = datetime.now()
+        post_item = BlogPostItem(date_time=x,
                                  title=item.title,
                                  body=item.body)
+
         self.db.add(post_item)
         self.db.commit()
         self.db.refresh(post_item)
+
         return post_item
 
     def get_item(self, item_title: str) -> Union[BlogPostItem, None]:
@@ -48,3 +34,22 @@ class BlogCRUD(AppCRUD):
         if post_item:
             return post_item
         return None
+
+class BlogService(AppService):
+    def create_item(self, item: BlogPostCreate) -> ServiceResult:
+        # Insert blog post
+        blogpost_item = BlogCRUD(self.db).create_item(item)
+        # Afterwards try to retreive it.
+        if not blogpost_item:
+            # If it isn't there, return an exception.
+            return ServiceResult(AppException.BlogCreateItem())
+        return ServiceResult(blogpost_item)
+
+        # Get post by providing the post's title.
+    def get_item(self, blogpost_title: str):
+        post_item = BlogCRUD(self.db).get_item(blogpost_title)
+        if not post_item:
+            return ServiceResult(AppException.BlogGetPost({"blogpost_title": post_item}))
+
+        return ServiceResult(post_item)
+

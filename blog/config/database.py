@@ -3,24 +3,26 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from blog import Config
 
-SQLITE_DATABASE_URL = "sqlite:///./app.db"
 
 addr: str = Config.sql_address()
 name: str = Config.sql_name()
 password: str = Config.sql_pass()
 db: str = Config.sql_db()
 
-MARIADB_DATABASE_URL = f"mariadb+mariadbconnector://{name}:{password}@{addr}:3306/{db}"
-
 '''
-SQLite DB
+MARIADB_DATABASE_URL = f"mariadb+mariadbconnector://{name}:{password}@{addr}:3306/{db}"
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL,
-    connect_args={"check_same_thread": False},
+    MARIADB_DATABASE_URL,
 )
 '''
 
-engine = create_engine(MARIADB_DATABASE_URL)
+# SQLite DB
+SQLITE_DATABASE_URL = "sqlite:///./app.db"
+engine = create_engine(
+    SQLITE_DATABASE_URL,
+    connect_args={"check_same_thread": False},
+)
+
 
 SessionLocal = sessionmaker(
     autocommit=False,
