@@ -2,18 +2,16 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class DHTItemBase(BaseModel):
-    time_log: str
+    humidity: float
+    temperature: float
 
 # This is the schema that the endpoint
 # expects to receive from POST
 class DHTItemCreate(DHTItemBase):
-    read_time: datetime
-    humidity: float
-    temperature: float
+    pass
 
 class DHTItem(DHTItemBase):
-    humidity: float
-    temperature: float
+    read_time: datetime
 
     class Config:
         orm_mode = True

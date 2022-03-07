@@ -13,10 +13,11 @@ class DHTCRUD(AppCRUD):
     def create_item(self, item: DHTItemCreate) -> DHTItem:
         dht_item = DHTItem(humidity=item.humidity,
                            temperature=item.temperature,
-                           read_time=item.time_log)
+                           read_time=datetime.now())
         self.db.add(dht_item)
         self.db.commit()
         self.db.refresh(dht_item)
+
         return dht_item
 
     def get_item(self, date) -> Union[DHTItem, None]:
@@ -25,8 +26,6 @@ class DHTCRUD(AppCRUD):
         if dht_item:
             return dht_item
         return None
-
-
 
 
 class DHTService(AppService):

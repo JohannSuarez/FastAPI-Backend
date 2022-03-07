@@ -18,8 +18,8 @@ we found.
 
 class BlogCRUD(AppCRUD):
     def create_item(self, item: BlogPostCreate) -> BlogPostItem:
-        x = datetime.now()
-        post_item = BlogPostItem(date_time=x,
+
+        post_item = BlogPostItem(date_time=datetime.now(),
                                  title=item.title,
                                  body=item.body)
 
